@@ -120,16 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 👉 LƯU DỮ LIỆU (QUAN TRỌNG)
     // Gửi dữ liệu lên Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbzVMVF7CbLj8WvIslbj5S7GylDg2dEiu5ar9JYfo_5RHLJ4PGmOWGxIX05dmEuh_VB_/exec", {
+fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf93xbdtuWa_4HAyeanJZLEXtsIczS1U8ycAl/exec", {
     method: "POST",
+    headers: {
+        "Content-Type": "text/plain;charset=utf-8" // 🔥 QUAN TRỌNG
+    },
     body: JSON.stringify({
         sbd: sbd,
         cccd: cccd,
         email: email
-    }),
-    headers: {
-        "Content-Type": "application/json"
-    }
+    })
+});
 })
 .then(res => res.text())
 .then(data => console.log("Saved:", data))
