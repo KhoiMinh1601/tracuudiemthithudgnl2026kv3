@@ -123,14 +123,13 @@ document.addEventListener('DOMContentLoaded', () => {
 fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf93xbdtuWa_4HAyeanJZLEXtsIczS1U8ycAl/exec", {
     method: "POST",
     headers: {
-        "Content-Type": "text/plain;charset=utf-8" // 🔥 QUAN TRỌNG
+        "Content-Type": "text/plain;charset=utf-8"
     },
     body: JSON.stringify({
         sbd: sbd,
         cccd: cccd,
         email: email
     })
-});
 })
 .then(res => res.text())
 .then(data => console.log("Saved:", data))
