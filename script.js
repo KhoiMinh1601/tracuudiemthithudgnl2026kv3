@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 👉 LƯU DỮ LIỆU (QUAN TRỌNG)
     // Gửi dữ liệu lên Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf93xbdtuWa_4HAyeanJZLEXtsIczS1U8ycAl/exec", {
+fetch("https://script.google.com/macros/s/AKfycbwCj_eIRj9UNZIFUd4D1mKpjO_e9X1ZAP8MqK4N1yCdv-fULO70xVCq466de8OWrHPr/exec", {
     method: "POST",
     body: JSON.stringify({
         sbd: sbd,
