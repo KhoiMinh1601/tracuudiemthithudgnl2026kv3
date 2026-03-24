@@ -296,16 +296,3 @@ h1 {
     width: 250px;
 }
 
-#exportBtn {
-    padding: 10px 20px;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-#exportBtn:hover {
-    background: darkgreen;
-}
-
