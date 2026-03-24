@@ -39,7 +39,7 @@
             margin-bottom: 10px;
         }
     </style>
-     <link rel="icon" type="image/png" href="Favicon.png">
+    <link rel="icon" type="image/png" href="Favicon.png">
 </head>
 
 <body>
@@ -55,10 +55,17 @@
             <img src="Untitled-1-08.png" alt="NQH Logo" class="logo">
         </div>
         <h1>TRA CỨU ĐIỂM THI THỬ <br> ĐÁNH GIÁ NĂNG LỰC 2026 </h1>
-        <div class="search-container">
-            <input type="text" id="sbdInput" placeholder="Nhập số báo danh">
-            <button id="searchBtn">TRA CỨU</button>
-        </div>
+     <div class="search-container">
+    <input type="text" id="sbdInput" placeholder="Nhập số báo danh">
+    <input type="text" id="cccdInput" placeholder="Nhập CCCD">
+    <input type="email" id="emailInput" placeholder="Nhập Email">
+    <button id="searchBtn">TRA CỨU</button>
+</div>
+
+<!-- Nút xuất dữ liệu -->
+<div style="margin-top:15px;">
+    <button id="exportBtn">Xuất dữ liệu người dùng</button>
+</div>
         <div id="resultContainer">
             <!-- Kết quả hiển thị ở đây -->
         </div>
@@ -67,4 +74,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-

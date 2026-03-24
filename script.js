@@ -1,8 +1,11 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => { 
     const sbdInput = document.getElementById('sbdInput');
+    const cccdInput = document.getElementById('cccdInput');
+    const emailInput = document.getElementById('emailInput');
     const searchBtn = document.getElementById('searchBtn');
     const resultContainer = document.getElementById('resultContainer');
     let studentData = [];
+    let userLogs = [];
 
     function normalizeKey(key) {
         return key.trim().replace(/\s+/g, ' ').toLowerCase();
@@ -101,20 +104,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     searchBtn.addEventListener('click', async () => {
-        const sbd = sbdInput.value.trim();
-        if (!sbd) {
-            resultContainer.innerHTML = '<p style="color:red;">Vui lòng nhập SBD.</p>';
-            return;
-        }
+    const sbd = sbdInput.value.trim();
+    const cccd = cccdInput.value.trim();
+    const email = emailInput.value.trim();
 
-        if (studentData.length === 0) await loadStudentData();
+    // Kiểm tra nhập đủ
+    if (!sbd || !cccd || !email) {
+        resultContainer.innerHTML = '<p style="color:red;">Vui lòng nhập đầy đủ thông tin.</p>';
+        return;
+    }
 
-        const student = findStudentBySBD(sbd);
-        if (!student) {
-            resultContainer.innerHTML = `<p style="color:orange;">Không tìm thấy SBD <strong>${sbd}</strong></p>`;
-        } else {
-            displayStudent(student);
-        }
+    // Kiểm tra CCCD 12 số
+    if (!/^\d{12}$/.test(cccd)) {
+        resultContainer.innerHTML = '<p style="color:red;">CCCD phải gồm 12 số!</p>';
+        return;
+    }
+
+    // 👉 LƯU DỮ LIỆU (QUAN TRỌNG)
+    // Gửi dữ liệu lên Google Sheet
+fetch("https://script.google.com/macros/s/AKfycbzH4yFfl-PBwcgp_mI1mJKZfnBy4kUscpfxBzffE44eM_jxHSMCQHDvCyZEdxP7Rhtf/exec", {
+    method: "POST",
+    body: JSON.stringify({
+        sbd: sbd,
+        cccd: cccd,
+        email: email
+    }),
+    headers: {
+        "Content-Type": "application/json"
+    }
+})
+.then(res => res.json())
+.then(data => console.log("Saved:", data))
+.catch(err => console.error("Error:", err));
+
+    // Load dữ liệu nếu chưa có
+    if (studentData.length === 0) await loadStudentData();
+
+    // ❗ CHỈ TRA CỨU BẰNG SBD
+    const student = findStudentBySBD(sbd);
+
+    if (!student) {
+        resultContainer.innerHTML = `<p style="color:orange;">Không tìm thấy SBD <strong>${sbd}</strong></p>`;
+    } else {
+        displayStudent(student);
+    }
+        // const sbd = sbdInput.value.trim();
+        // if (!sbd) {
+        //     resultContainer.innerHTML = '<p style="color:red;">Vui lòng nhập SBD.</p>';
+        //     return;
+        // }
+
+        // if (studentData.length === 0) await loadStudentData();
+
+        // const student = findStudentBySBD(sbd);
+        // if (!student) {
+        //     resultContainer.innerHTML = `<p style="color:orange;">Không tìm thấy SBD <strong>${sbd}</strong></p>`;
+        // } else {
+        //     displayStudent(student);
+        // }
     });
 
     function displayStudent(data) {
@@ -194,6 +241,28 @@ document.addEventListener('DOMContentLoaded', () => {
     
 
     loadStudentData(); // preload
+    if (userLogs.length === 0) {
+        alert("Chưa có dữ liệu!");
+        return;
+    }
 
+    let csv = "SBD,CCCD,Email,Time\n";
+
+    userLogs.forEach(row => {
+        csv += `${row.sbd},${row.cccd},${row.email},${row.time}\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'user_logs.csv';
+    a.click();
 });
-
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+        exportBtn.style.display = 'inline-block';
+        alert("Admin mode ON");
+    }
+});
