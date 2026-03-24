@@ -240,9 +240,4 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
     loadStudentData(); // preload
 
 });
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'E') {
-        exportBtn.style.display = 'inline-block';
-        alert("Admin mode ON");
-    }
-});
+
