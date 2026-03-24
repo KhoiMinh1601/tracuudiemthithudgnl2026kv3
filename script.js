@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchBtn = document.getElementById('searchBtn');
     const resultContainer = document.getElementById('resultContainer');
     let studentData = [];
-    let userLogs = [];
-
     function normalizeKey(key) {
         return key.trim().replace(/\s+/g, ' ').toLowerCase();
     }
@@ -122,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 👉 LƯU DỮ LIỆU (QUAN TRỌNG)
     // Gửi dữ liệu lên Google Sheet
-fetch("https://script.google.com/macros/s/AKfycbzH4yFfl-PBwcgp_mI1mJKZfnBy4kUscpfxBzffE44eM_jxHSMCQHDvCyZEdxP7Rhtf/exec", {
+fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf93xbdtuWa_4HAyeanJZLEXtsIczS1U8ycAl/exec", {
     method: "POST",
     body: JSON.stringify({
         sbd: sbd,
@@ -133,10 +131,9 @@ fetch("https://script.google.com/macros/s/AKfycbzH4yFfl-PBwcgp_mI1mJKZfnBy4kUscp
         "Content-Type": "application/json"
     }
 })
-.then(res => res.json())
+.then(res => res.text())
 .then(data => console.log("Saved:", data))
 .catch(err => console.error("Error:", err));
-
     // Load dữ liệu nếu chưa có
     if (studentData.length === 0) await loadStudentData();
 
@@ -241,24 +238,7 @@ fetch("https://script.google.com/macros/s/AKfycbzH4yFfl-PBwcgp_mI1mJKZfnBy4kUscp
     
 
     loadStudentData(); // preload
-    if (userLogs.length === 0) {
-        alert("Chưa có dữ liệu!");
-        return;
-    }
 
-    let csv = "SBD,CCCD,Email,Time\n";
-
-    userLogs.forEach(row => {
-        csv += `${row.sbd},${row.cccd},${row.email},${row.time}\n`;
-    });
-
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'user_logs.csv';
-    a.click();
 });
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key === 'E') {
