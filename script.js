@@ -160,7 +160,15 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
         //     displayStudent(student);
         // }
     });
+function formatDateVN(dateStr) {
+    if (!dateStr) return '';
 
+    const parts = dateStr.split('/');
+    if (parts.length !== 3) return dateStr;
+
+    // MM/DD/YYYY → DD/MM/YYYY
+    return `${parts[1]}/${parts[0]}/${parts[2]}`;
+}
     function displayStudent(data) {
         const infoFields = ['SBD', 'HỌ VÀ TÊN','NGÀY SINH',];
     const scoreFields = [
@@ -218,15 +226,7 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
         </div>
     </div>
     `;
-function formatDateVN(dateStr) {
-    if (!dateStr) return '';
 
-    const parts = dateStr.split('/');
-    if (parts.length !== 3) return dateStr;
-
-    // MM/DD/YYYY → DD/MM/YYYY
-    return `${parts[1]}/${parts[0]}/${parts[2]}`;
-}
     resultContainer.innerHTML = html;
         // const infoFields = ['SBD', 'HỌ VÀ TÊN', 'NGÀY THÁNG NĂM SINH', 'GIỚI TÍNH'];
         // const scoreFields = ['TIẾNG VIỆT', 'TIẾNG ANH', 'TOÁN HỌC','LOGIC-PTSL', 'HÓA HỌC', 'VẬT LÝ','SINH HỌC','ĐỊA LÝ','LỊCH SỬ','KTPL']; // Removed 'Tổng điểm', ĐÂY LÀ NƠI THÊM CỘT ĐIỂM
