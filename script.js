@@ -162,7 +162,7 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
     });
 
     function displayStudent(data) {
-        const infoFields = ['SBD', 'HỌ VÀ TÊN','NGÀY SINH','GHI CHÚ'];
+        const infoFields = ['SBD', 'HỌ VÀ TÊN','NGÀY SINH',];
     const scoreFields = [
         {key: 'TIẾNG VIỆT', max: 300},
         {key: 'TIẾNG ANH', max: 300},
