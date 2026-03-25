@@ -182,16 +182,13 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
             <h2>KẾT QUẢ THI</h2>
         </div>
         
-       <div class="student-info-box">
+     <div class="student-info-box">
     ${infoFields.map(f => data[f] ? `<p><strong>${f}:</strong> ${data[f]}</p>` : '').join('')}
 
-    ${data['GHI CHÚ'] ? `
-        <p style="color:red;">
-            <strong>Ghi chú:</strong> ${data['GHI CHÚ']}
-        </p>
-    ` : ''}
+    <p>
+        <strong>Ghi chú:</strong> ${data['GHI CHÚ'] || ''}
+    </p>
 </div>
-
         <div class="score-bars">
     `;
 
