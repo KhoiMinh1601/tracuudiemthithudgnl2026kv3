@@ -162,7 +162,7 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
     });
 
     function displayStudent(data) {
-        const infoFields = ['SBD', 'HỌ VÀ TÊN',];
+        const infoFields = ['SBD', 'HỌ VÀ TÊN','NGÀY SINH'];
     const scoreFields = [
         {key: 'TIẾNG VIỆT', max: 300},
         {key: 'TIẾNG ANH', max: 300},
@@ -182,9 +182,15 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
             <h2>KẾT QUẢ THI</h2>
         </div>
         
-        <div class="student-info-box">
-            ${infoFields.map(f => data[f] ? `<p><strong>${f}:</strong> ${data[f]}</p>` : '').join('')}
-        </div>
+       <div class="student-info-box">
+    ${infoFields.map(f => data[f] ? `<p><strong>${f}:</strong> ${data[f]}</p>` : '').join('')}
+
+    ${data['GHI CHÚ'] ? `
+        <p style="color:red;">
+            <strong>Ghi chú:</strong> ${data['GHI CHÚ']}
+        </p>
+    ` : ''}
+</div>
 
         <div class="score-bars">
     `;
