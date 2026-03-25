@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function parseCSV(text) {
         const lines = text.split('\n').filter(line => line.trim());
-        const headers = lines[0].split(',').map(h => h.trim());
+const delimiter = lines[0].includes(';') ? ';' : ',';
+const headers = lines[0].split(delimiter).map(h => h.trim());
         const students = [];
 
         for (let i = 1; i < lines.length; i++) {
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let j = 0; j < line.length; j++) {
                 const char = line[j];
                 if (char === '"') inQuotes = !inQuotes;
-                else if (char === ',' && !inQuotes) {
+                else if (char === delimiter && !inQuotes) {
                     values.push(current.trim());
                     current = '';
                 } else {
