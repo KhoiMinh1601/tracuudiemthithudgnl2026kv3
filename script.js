@@ -160,15 +160,6 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
         //     displayStudent(student);
         // }
     });
-function formatDateVN(dateStr) {
-    if (!dateStr) return '';
-
-    const parts = dateStr.split('/');
-    if (parts.length !== 3) return dateStr;
-
-    // MM/DD/YYYY → DD/MM/YYYY
-    return `${parts[1]}/${parts[0]}/${parts[2]}`;
-}
     function displayStudent(data) {
         const infoFields = ['SBD', 'HỌ VÀ TÊN','NGÀY SINH',];
     const scoreFields = [
@@ -191,11 +182,7 @@ function formatDateVN(dateStr) {
         </div>
         
      <div class="student-info-box">
-   ${infoFields.map(f => 
-    data[f] 
-        ? `<p><strong>${f}:</strong> ${f === 'NGÀY SINH' ? formatDateVN(data[f]) : data[f]}</p>` 
-        : ''
-).join('')}
+ ${infoFields.map(f => data[f] ? `<p><strong>${f}:</strong> ${data[f]}</p>` : '').join('')}
     <p>
         <strong>GHI CHÚ:</strong> ${data['GHI CHÚ'] || ''}
     </p>
