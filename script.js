@@ -186,7 +186,7 @@ fetch("https://script.google.com/macros/s/AKfycbwzow93A_m3BP9mFO6lZFWQkauEVSbmf9
     ${infoFields.map(f => data[f] ? `<p><strong>${f}:</strong> ${data[f]}</p>` : '').join('')}
 
     <p>
-        <strong>GHI CHÚ:</strong> ${data['GHI CHÚ:'] || ''}
+        <strong>GHI CHÚ:</strong> ${data['GHI CHÚ'] || ''}
     </p>
 </div>
         <div class="score-bars">
